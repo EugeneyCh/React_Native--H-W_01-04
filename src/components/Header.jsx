@@ -45,7 +45,7 @@ export default function Header({ title }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    // alignItems: "center",
+    alignItems: "center",
   },
   text: {
     height: 36,

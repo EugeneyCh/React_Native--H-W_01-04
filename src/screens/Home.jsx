@@ -1,34 +1,20 @@
-// Home.js
-
 import React from "react";
 import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import PostsScreen from "../PostsScreen";
-import ProfileScreen from "../ProfileScreen";
-import CreatePostsScreen from "../CreatePostsScreen";
+import PostsScreen from "./PostsScreen";
+import ProfileScreen from "./ProfileScreen";
+import CreatePostsScreen from "./CreatePostsScreen";
 
-function CreatePostsButton() {
-  return (
-    <TouchableOpacity>
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>+</Text>
-      </View>
-    </TouchableOpacity>
-
-    // <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    //   <Text>Settings!</Text>
-    // </View>
-  );
-}
-
-function Profile() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Profile!</Text>
-    </View>
-  );
-}
+// function CreatePostsButton() {
+//   return (
+//     <TouchableOpacity>
+//       <View style={styles.button}>
+//         <Text style={styles.buttonText}>+</Text>
+//       </View>
+//     </TouchableOpacity>
+//   );
+// }
 
 const Tabs = createBottomTabNavigator();
 
@@ -41,7 +27,7 @@ const Home = () => {
           if (route.name === "Posts") {
             iconName = focused ? "grid" : "grid-outline";
           } else if (route.name === "CreatePosts") {
-            iconName = focused ? <CreatePostsButton /> : <CreatePostsButton />;
+            iconName = focused ? "add-circle" : "add-circle-outline";
           } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person-outline";
           }
@@ -55,7 +41,6 @@ const Home = () => {
           display: "none",
         },
       }}
-      // style={styles.tabBarIcon}
     >
       <Tabs.Screen
         name="Posts"
@@ -64,10 +49,9 @@ const Home = () => {
           headerRight: () => (
             <Ionicons
               name="log-out-outline"
-              size={26}
+              size={30}
               color={"gray"}
               onPress={() => alert("This is a button!")}
-              // style={{ maringRight: 20 }}
             />
           ),
         }}
@@ -88,16 +72,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     title: "",
   },
-  button: {
-    width: 344,
-    height: 52,
-    backgroundColor: "#FF6C00",
-    marginTop: 44,
-    borderRadius: 100,
-  },
-  buttonText: {
-    fontSize: 16,
-  },
+  // button: {
+  //   width: 344,
+  //   height: 52,
+  //   backgroundColor: "#FF6C00",
+  //   marginTop: 44,
+  //   borderRadius: 100,
+  // },
+  // buttonText: {
+  //   fontSize: 16,
+  // },
 });
 
 export default Home;
