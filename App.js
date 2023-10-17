@@ -95,13 +95,6 @@
 // });
 
 import * as React from "react";
-import {
-  ImageBackground,
-  Keyboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
 import "react-native-gesture-handler";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -114,8 +107,6 @@ const MainStack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      {/* <ImageBackground source={PhotoBG} style={styles.background}> */}
-      {/* <View style={styles.bottomContent}></View> */}
       <MainStack.Navigator initialRouteName="Login">
         <MainStack.Screen
           name="Home"
@@ -133,34 +124,6 @@ export default function App() {
           options={{ headerShown: false }}
         />
       </MainStack.Navigator>
-      {/* Вміст для розташування внизу сторінки */}
-      {/* <View style={styles.bottomContent}> */}
-      {/* Тут можуть бути інші елементи, такі як кнопки або текст */}
-      {/* </View> */}
-      {/* </ImageBackground> */}
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     // height: "100%",
-//     // flexDirection: "column-reverse",
-//     backgroundColor: "#555",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-
-// background: {
-//   flex: 1,
-//   resizeMode: "cover",
-//   justifyContent: "center",
-// },
-// bottomContent: {
-//   flex: 1,
-//   justifyContent: "flex-end",
-//   alignItems: "center",
-//   marginBottom: 20, // Задайте необхідний відступ внизу
-// },
-// });
