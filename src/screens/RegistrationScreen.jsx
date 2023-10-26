@@ -13,16 +13,21 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import PhotoBG from "../../images/PhotoBG.png";
 import Header from "../components/Header";
 import { useFonts } from "expo-font";
 
 import { useNavigation } from "@react-navigation/native";
+import HomeIndicator from "../components/HomeIndicator";
 
 export default function RegistrationScreen() {
-  const [login, setLogin] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordIsShow, setPasswordIsShow] = useState(false);
+
+  const [avatarImg, setAvatarImg] = useState(
+    require("../../assets/images/emptyImg.png")
+  );
   const navigation = useNavigation();
 
   const [isNicknameFocused, setIsNicknameFocused] = useState(false);
@@ -39,96 +44,123 @@ export default function RegistrationScreen() {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <ImageBackground source={PhotoBG} style={styles.background}>
-        {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
-        {/* <View style={styles.container}> */}
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "flex-end" }}
         >
-          <View style={styles.imageAcBox}>
-            <View style={styles.imageAc}>
-              {/* <Image source={ImageAc} style={styles.image} /> */}
-            </View>
-            <View style={styles.icon}>
-              <Ionicons
-                position="absolute"
-                name="add-outline"
-                size={24}
-                color={"#FF6C00"}
-                onPress={() => alert("This is a button!")}
-              />
-            </View>
-          </View>
-          <Header title="Реєстрація" />
-          <TextInput
-            placeholder="Логін"
-            autoComplete="nickname"
-            textContentType="nickname"
-            value={login}
-            onFocus={() => setIsNicknameFocused(true)}
-            onBlur={() => setIsNicknameFocused(false)}
-            style={{
-              ...styles.text,
-              borderColor: isNicknameFocused ? "#FF6C00" : "#E8E8E8",
-            }}
-            onChangeText={setLogin}
-          ></TextInput>
-          <TextInput
-            placeholder="Адреса електронної пошти"
-            autoComplete="email"
-            textContentType="emailAddress"
-            value={email}
-            onFocus={() => setIsEmailFocused(true)}
-            onBlur={() => setIsEmailFocused(false)}
-            style={{
-              ...styles.text,
-              borderColor: isEmailFocused ? "#FF6C00" : "#E8E8E8",
-            }}
-            onChangeText={setEmail}
-          ></TextInput>
-          <TextInput
-            placeholder="Пароль"
-            autoComplete="password"
-            textContentType="password"
-            secureTextEntry
-            value={password}
-            onFocus={() => setIsPasswordFocused(true)}
-            onBlur={() => setIsPasswordFocused(false)}
-            style={{
-              ...styles.text,
-              borderColor: isPasswordFocused ? "#FF6C00" : "#E8E8E8",
-            }}
-            onChangeText={setPassword}
-          ></TextInput>
+          <ImageBackground
+            source={require("../../assets/images/bgImage.png")}
+            resizeMode="cover"
+            style={styles.background}
+          >
+            <View style={styles.contant}>
+              <View style={styles.imageAcBox}>
+                <View style={styles.imageAc}>
+                  <Image source={avatarImg} style={styles.image} />
+                </View>
+                <View style={styles.icon}>
+                  <Ionicons
+                    position="absolute"
+                    name="add-outline"
+                    size={24}
+                    color={"#FF6C00"}
+                    onPress={() => alert("This is a button!")}
+                  />
+                </View>
+              </View>
+              <Header title="Реєстрація" />
+              <TextInput
+                placeholder="Логін"
+                autoComplete="nickname"
+                textContentType="nickname"
+                value={login}
+                onFocus={() => setIsNicknameFocused(true)}
+                onBlur={() => setIsNicknameFocused(false)}
+                style={{
+                  ...styles.text,
+                  borderColor: isNicknameFocused ? "#FF6C00" : "#E8E8E8",
+                }}
+                onChangeText={setLogin}
+              ></TextInput>
 
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-            <View style={styles.button}>
-              <Text style={styles.buttonText}>Зареєстуватися</Text>
+              <TextInput
+                placeholder="Адреса електронної пошти"
+                autoComplete="email"
+                textContentType="emailAddress"
+                value={email}
+                onFocus={() => setIsEmailFocused(true)}
+                onBlur={() => setIsEmailFocused(false)}
+                style={{
+                  ...styles.text,
+                  borderColor: isEmailFocused ? "#FF6C00" : "#E8E8E8",
+                }}
+                onChangeText={setEmail}
+              ></TextInput>
+
+              <TextInput
+                placeholder="Пароль"
+                autoComplete="password"
+                textContentType="password"
+                secureTextEntry={!passwordIsShow}
+                value={password}
+                onFocus={() => setIsPasswordFocused(true)}
+                onBlur={() => setIsPasswordFocused(false)}
+                style={{
+                  ...styles.text,
+                  borderColor: isPasswordFocused ? "#FF6C00" : "#E8E8E8",
+                }}
+                onChangeText={setPassword}
+              ></TextInput>
+              <TouchableOpacity
+                style={styles.showPassword}
+                onPress={() => setPasswordIsShow((prevState) => !prevState)}
+              >
+                <Text> {!passwordIsShow ? "Показати" : "Приховати"}</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Home")}
+              >
+                {/* <View
+                  style={styles.button}
+                  onPress={() => navigation.navigate("Home")}
+                > */}
+                <Text style={styles.buttonText}>Зареєстуватися</Text>
+                {/* </View> */}
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <Text style={styles.linkText}>Вже є акаунт? Увійти</Text>
+              </TouchableOpacity>
+              <HomeIndicator style={styles.indicator} />
             </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={styles.linkText}>Вже є акаунт? Увійти</Text>
-          </TouchableOpacity>
-          {/* </View> */}
-          {/* </TouchableWithoutFeedback> */}
-        </KeyboardAvoidingView>
-      </ImageBackground>
-    </TouchableWithoutFeedback>
+          </ImageBackground>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
-    height: "548",
+    flex: 1,
+    // position: "relative",
+  },
+
+  contant: {
+    // flex: 1,
+    // position: "relative",
+    height: "70%",
     width: "100%",
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "flex-end",
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    justifyContent: "flex-start",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
     paddingHorizontal: 16,
   },
   background: {
@@ -195,7 +227,7 @@ const styles = StyleSheet.create({
     height: 52,
     backgroundColor: "#FF6C00",
     marginTop: 44,
-    borderRadius: 100,
+    borderRadius: 30,
   },
   buttonText: {
     fontFamily: "Roboto_400Regular",
@@ -210,5 +242,14 @@ const styles = StyleSheet.create({
     color: "#1B4371",
     marginTop: 16,
     paddingBottom: 78,
+  },
+  indicator: {
+    flex: 1,
+    height: 34,
+  },
+  showPassword: {
+    position: "absolute",
+    top: 287,
+    right: 30,
   },
 });

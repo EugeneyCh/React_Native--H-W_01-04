@@ -6,7 +6,7 @@ import PostsScreen from "./PostsScreen";
 import ProfileScreen from "./ProfileScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 
-// function CreatePostsButton() {
+// function createPostsButton() {
 //   return (
 //     <TouchableOpacity>
 //       <View style={styles.button}>

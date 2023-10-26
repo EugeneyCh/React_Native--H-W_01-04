@@ -94,6 +94,8 @@
 //   // },
 // });
 
+"use strict";
+
 import * as React from "react";
 import "react-native-gesture-handler";
 import RegistrationScreen from "./src/screens/RegistrationScreen";
